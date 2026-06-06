@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Property Matching Questionnaire - Swapna Gruha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 40px;
+        }
+
+        .header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #ff8c00;
+        }
+
+        .post-free-btn {
+            background-color: #ff8c00;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .post-free-btn:hover {
+            background-color: #e67e00;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .main {
+            color: #1e5aa8;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .logo-text .sub {
+            color: #ff8c00;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .questionnaire-container {
+            display: flex;
+            min-height: auto;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1a2a4e 0%, #243b5e 100%);
+            color: white;
+            padding: 40px 30px;
+            width: 350px;
+            overflow: visible;
+        }
+
+        .sidebar-title {
+            color: #ff8c00;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-heading {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .steps-list {
+            list-style: none;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ff8c00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .step-item.inactive .step-number {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .step-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .step-item.inactive .step-label {
+            opacity: 0.5;
+        }
+
+        .sidebar-footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 50px 60px;
+            overflow: visible;
+        }
+
+        .step-indicator {
+            color: #ff8c00;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .question-title {
+            font-size: 36px;
+            color: #1a2a4e;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .question-description {
+            color: #999;
+            font-size: 15px;
+            margin-bottom: 35px;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .option-card {
+            padding: 20px 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: #ff8c00;
+            background-color: #fff9f5;
+        }
+
+        .option-card.selected {
+            border-color: #ff8c00;
+            background-color: #fff9f5;
+        }
+
+        .option-card.selected::after {
+            content: '✓';
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ff8c00;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .option-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a2a4e;
+            margin-bottom: 5px;
+        }
+
+        .option-description {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-back {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-back:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-next {
+            background-color: #1a2a4e;
+            color: white;
+            margin-left: auto;
+        }
+
+        .btn-next:hover {
+            background-color: #0f1a34;
+        }
+
+        .questionnaire-step {
+            display: none;
+        }
+
+        .questionnaire-step.active {
+            display: block;
+        }
+
+        .results-section {
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .result-card {
+            background: white;
+            border: 2px solid #ff8c00;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        .result-card-image {
+            flex-shrink: 0;
+            width: 220px;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .result-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .result-card-content {
+            flex: 1;
+        }
+
+        .result-rank {
+            display: inline-block;
+            background: #1a2a4e;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a2a4e;
+            margin-bottom: 8px;
+        }
+
+        .result-match {
+            font-size: 32px;
+            color: #ff8c00;
+            font-weight: bold;
+        }
+
+        .match-label {
+            font-size: 11px;
+            color: #999;
+            margin-left: 8px;
+        }
+
+        .detail-item {
+            color: #666;
+            margin: 8px 0;
+        }
+
+        .detail-item .tick {
+            color: #ff8c00;
+            margin-right: 8px;
+        }
+
+        .logo-svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: auto;
+            max-height: 60px;
+        }
+
+        .banner {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background: none;
+        }
+
+        .banner-footer-line {
+            background-color: #2c5aa0;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+        }
+
+        .banner-footer-content {
+            max-width: 100%;
+            margin: 0 auto;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .media-feeds-section {
+            background-color: #f9f9f9;
+            padding: 60px 20px;
+        }
+
+        .media-feeds-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .media-section-subtitle {
+            color: #ff8c00;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .media-section-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1a2a4e;
+            margin-bottom: 15px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .media-section-description {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background-color: white;
+            color: #666;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-btn.active {
+            background-color: #1a2a4e;
+            color: white;
+        }
+
+        .filter-btn:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .media-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .media-card-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .media-card-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .media-card-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .media-card-play {
+            width: 60px;
+            height: 60px;
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .media-card:hover .media-card-play {
+            transform: scale(1.1);
+        }
+
+        .media-card-1 { background: linear-gradient(135deg, #1a2a4e 0%, #2c3e5e 100%); }
+        .media-card-2 { background: linear-gradient(135deg, #ff3366 0%, #ff8844 100%); }
+        .media-card-3 { background: linear-gradient(135deg, #8b2e2e 0%, #a85555 100%); }
+        .media-card-4 { background: linear-gradient(135deg, #5a5a3a 0%, #8a8a6a 100%); }
+        .media-card-5 { background: linear-gradient(135deg, #1a5a3a 0%, #2a8a5a 100%); }
+
+        .media-card-title {
+            position: absolute;
+            bottom: 40px;
+            left: 15px;
+            right: 15px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        /* --- NEW FOOTER STYLES --- */
+        .site-footer {
+            background-color: #0a1930;
+            color: white;
+            padding: 0 40px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            font-size: 13px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            z-index: 10;
+        }
+
+        .footer-left > a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-social {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #ff8c00;
+        }
+
+        .footer-contact-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 10px;
+        }
+
+        .contact-bubble {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            border: 2px solid white;
+            position: relative;
+            top: -5px; /* Creates the pop-out effect from the image */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .contact-bubble:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .bubble-chat { background-color: #3b82f6; }
+        .bubble-wa { background-color: #22c55e; }
+
+        .footer-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        .footer-center b {
+            font-weight: normal;
+        }
+        
+        .powered-by-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        @media (max-width: 1200px) {
+            .media-cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                height: auto;
+                padding: 25px;
+                gap: 20px;
+            }
+            .footer-center {
+                position: static;
+                transform: none;
+                text-align: center;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .contact-bubble {
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .media-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="logo-container">
+                <img src="./swapna-gruha-logo.jpg" alt="Swapna Gruha Logo" class="logo-img">
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#properties">PROPERTIES ⌄</a></li>
+                    <li><a href="#buy">BUY</a></li>
+                    <li><a href="#sell">SELL</a></li>
+                    <li><a href="#services">SERVICES ⌄</a></li>
+                    <li><a href="#blogs">BLOGS</a></li>
+                    <li><a href="#builders">LEADING BUILDERS ⌄</a></li>
+                    <li><a href="#contact">CONTACT US</a></li>
+                    <li><button class="post-free-btn">POST FREE</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="banner">
+        <img src="./Bannerfinal1.jpg" alt="Aparna Experience Zone" class="banner-image" style="width: 100%; height: auto; display: block;">
+    </div>
+
+    <div class="banner-footer-line">
+        <div class="banner-footer-content">
+            ✦ SMART PROPERTY MATCHING TOOL – DISCOVER YOUR IDEAL APARNA PROJECT FROM YOUR PREFERENCES1 ✦
+        </div>
+    </div>
+
+    <div class="questionnaire-container">
+        <div class="sidebar">
+            <div class="sidebar-heading">Property Match Criteria</div>
+            <ul class="steps-list">
+                <li class="step-item active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Property Type</div>
+                </li>
+                <li class="step-item inactive">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Location</div>
+                </li>
+                <li class="step-item inactive">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Configuration</div>
+                </li>
+                <li class="step-item inactive">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Price Range</div>
+                </li>
+            </ul>
+            <!-- <div class="sidebar-footer">
+                Secure local analytics. Your search preferences are stored exclusively on client state.
+            </div> -->
+        </div>
+
+        <div class="main-content">
+            <div class="questionnaire-step active" data-step="1">
+                <div class="step-indicator">STEP 01 / 04</div>
+                <h2 class="question-title">What type of property are you looking for?</h2>
+                <p class="question-description">Choose the property type that best suits your needs.</p>
+                <div class="options-container">
+                    <div class="option-card" onclick="selectOption(this, 1)">
+                        <div class="option-title">Residential</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 1)">
+                        <div class="option-title">Villa</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 1)">
+                        <div class="option-title">Plot</div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-next" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <div class="questionnaire-step" data-step="2">
+                <div class="step-indicator">STEP 02 / 04</div>
+                <h2 class="question-title">Which location do you prefer?</h2>
+                <p class="question-description">Choose the area that best suits your lifestyle.</p>
+                <div class="options-container">
+                    <div class="option-card" onclick="selectOption(this, 2)">
+                        <div class="option-title">Nallagandla & Gachibowli</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 2)">
+                        <div class="option-title">Puppalaguda & Nanakramguda</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 2)">
+                        <div class="option-title">Kondapur / Hitec City</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 2)">
+                        <div class="option-title">Shamshabad Airport Area</div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-back" onclick="previousStep()">Previous</button>
+                    <button class="btn btn-next" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <div class="questionnaire-step" data-step="3">
+                <div class="step-indicator">STEP 03 / 04</div>
+                <h2 class="question-title">What configuration do you prefer?</h2>
+                <p class="question-description">Select the number of bedrooms that suits your requirement.</p>
+                <div class="options-container">
+                    <div class="option-card" onclick="selectOption(this, 3)">
+                        <div class="option-title">1 BHK</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 3)">
+                        <div class="option-title">2 BHK</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 3)">
+                        <div class="option-title">3 BHK</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 3)">
+                        <div class="option-title">4 BHK and Above</div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-back" onclick="previousStep()">Previous</button>
+                    <button class="btn btn-next" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <div class="questionnaire-step" data-step="4">
+                <div class="step-indicator">STEP 04 / 04</div>
+                <h2 class="question-title">What is your budget range?</h2>
+                <p class="question-description">Select the price range that fits your investment capacity.</p>
+                <div class="options-container">
+                    <div class="option-card" onclick="selectOption(this, 4)">
+                        <div class="option-title">₹70 Lakhs - ₹1.00 Cr</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 4)">
+                        <div class="option-title">₹1.00 Cr - ₹1.75 Cr</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 4)">
+                        <div class="option-title">₹1.75 Cr - ₹3.00 Cr</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 4)">
+                        <div class="option-title">₹3.00 Cr+</div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-back" onclick="previousStep()">Previous</button>
+                    <button class="btn btn-next" style="background-color: #ff8c00;" onclick="showResults()">Find My Ideal Property</button>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <h2 class="question-title">Your Calculated Fits</h2>
+                <p class="question-description" style="margin-bottom: 30px;">These are your personalized property recommendations based on your preferences</p>
+                
+                <div class="result-card">
+                    <div class="result-card-image">
+                        <img src="./aparna-zenon-new.png" alt="Aparna Zenon">
+                    </div>
+                    <div class="result-card-content">
+                        <div class="result-rank">Rank #1 Fit</div>
+                        <div class="result-title">Aparna Zenon</div>
+                        <div style="color: #999; margin-bottom: 15px;">Puppalaguda, near Nanakramguda</div>
+                        <div style="margin-bottom: 15px;">
+                            <span class="result-match">98%</span>
+                            <span class="match-label">MATCH RATE</span>
+                        </div>
+                        <div style="margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 15px;">
+                            <strong style="color: #ff8c00;">MATCHING PARAMETERS</strong>
+                            <div class="detail-item"><span class="tick">✓</span> Perfect representation of your selected elite mid-budget scale.</div>
+                            <div class="detail-item"><span class="tick">✓</span> Offers customized layout options for 3 BHK configurations directly.</div>
+                            <div class="detail-item"><span class="tick">✓</span> Engineered for quick accessibility to primary IT corridor centers.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-card-image">
+                        <img src="./aparna-sarovar-zenith.png" alt="Aparna Sarovar Zenith">
+                    </div>
+                    <div class="result-card-content">
+                        <div class="result-rank">Rank #2 Fit</div>
+                        <div class="result-title">Aparna Sarovar Zenith</div>
+                        <div style="color: #999; margin-bottom: 15px;">Nallagandla, near Gachibowli</div>
+                        <div style="margin-bottom: 15px;">
+                            <span class="result-match">96%</span>
+                            <span class="match-label">MATCH RATE</span>
+                        </div>
+                        <div style="margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 15px;">
+                            <strong style="color: #ff8c00;">MATCHING PARAMETERS</strong>
+                            <div class="detail-item"><span class="tick">✓</span> Premium smart living experience with integrated smart home features.</div>
+                            <div class="detail-item"><span class="tick">✓</span> Dedicated facilities for eco-conscious lifestyle priorities.</div>
+                            <div class="detail-item"><span class="tick">✓</span> High-connectivity access to multiple IT and corporate zones.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group" style="margin-top: 40px;">
+                    <button class="btn btn-back" onclick="goBack()">Modify Preferences</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function selectOption(element, step) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function nextStep() {
+            if (currentStep < 4) {
+                // Check if an option is selected
+                const activeStep = document.querySelector(`[data-step="${currentStep}"]`);
+                const selectedOption = activeStep.querySelector('.option-card.selected');
+                
+                if (!selectedOption) {
+                    alert('Please select an option before proceeding.');
+                    return;
+                }
+                
+                document.querySelectorAll('.questionnaire-step').forEach(el => {
+                    el.classList.remove('active');
+                });
+                currentStep++;
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+                updateSidebar();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                document.querySelectorAll('.questionnaire-step').forEach(el => {
+                    el.classList.remove('active');
+                });
+                currentStep--;
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+                updateSidebar();
+            }
+        }
+
+        function updateSidebar() {
+            document.querySelectorAll('.step-item').forEach((item, index) => {
+                item.classList.remove('active', 'inactive');
+                if (index + 1 <= currentStep) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.add('inactive');
+                }
+            });
+        }
+
+        function showResults() {
+            // Check if an option is selected on the last step
+            const lastStep = document.querySelector(`[data-step="4"]`);
+            const selectedOption = lastStep.querySelector('.option-card.selected');
+            
+            if (!selectedOption) {
+                alert('Please select an option before viewing results.');
+                return;
+            }
+            
+            document.querySelectorAll('.questionnaire-step').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById('resultsSection').classList.add('active');
+        }
+
+        function goBack() {
+            document.getElementById('resultsSection').classList.remove('active');
+            currentStep = 1;
+            document.querySelector(`[data-step="1"]`).classList.add('active');
+            updateSidebar();
+        }
+
+        function contactConsultant() {
+            alert('Scheduling VIP Consultation... Our team will contact you shortly!');
+        }
+
+        function filterMedia(category) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // You can add filtering logic here if needed
+            console.log('Filtering by: ' + category);
+        }
+    </script>
+
+    <section class="media-feeds-section">
+        <div class="media-feeds-container">
+            <div class="media-section-subtitle">SOCIAL WALKTHROUGHS & DYNAMIC SHORTS</div>
+            <h2 class="media-section-title">APARNA SHOWCASE MEDIA FEEDS</h2>
+            <p class="media-section-description">Explore curated video content – property walkthroughs, reels, commercials & real homeowner testimonials.</p>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterMedia('all')">ALL</button>
+                <button class="filter-btn" onclick="filterMedia('shorts')">APARNA SHORTS</button>
+                <button class="filter-btn" onclick="filterMedia('reels')">INSTAGRAM REELS</button>
+                <button class="filter-btn" onclick="filterMedia('youtube')">YOUTUBE</button>
+                <button class="filter-btn" onclick="filterMedia('commercials')">COMMERCIALS</button>
+                <button class="filter-btn" onclick="filterMedia('testimonials')">TESTIMONIALS</button>
+            </div>
+
+            <div class="media-cards-grid">
+                <div class="media-card media-card-1">
+                    <div class="media-card-content">
+                        <div class="media-card-label">SHORTS</div>
+                        <div class="media-card-play">▶</div>
+                        <div class="media-card-title">Aparna One<br>2BHK Sky Suite</div>
+                        <div class="media-card-duration">0:58</div>
+                    </div>
+                </div>
+
+                <div class="media-card media-card-2">
+                    <div class="media-card-content">
+                        <div class="media-card-label">REELS</div>
+                        <div class="media-card-play">▶</div>
+                        <div class="media-card-title">Luxury Living at Aparna</div>
+                        <div class="media-card-duration">0:30</div>
+                    </div>
+                </div>
+
+                <div class="media-card media-card-3">
+                    <div class="media-card-content">
+                        <div class="media-card-label">YOUTUBE</div>
+                        <div class="media-card-play">▶</div>
+                        <div class="media-card-title">Aparna CyberHeights<br>Full Tour</div>
+                        <div class="media-card-duration">8:42</div>
+                    </div>
+                </div>
+
+                <div class="media-card media-card-4">
+                    <div class="media-card-content">
+                        <div class="media-card-label">AD</div>
+                        <div class="media-card-play">▶</div>
+                        <div class="media-card-title">Aparna Constructions<br>Lead the</div>
+                        <div class="media-card-duration">1:00</div>
+                    </div>
+                </div>
+
+                <div class="media-card media-card-5">
+                    <div class="media-card-content">
+                        <div class="media-card-label">STORY</div>
+                        <div class="media-card-play">▶</div>
+                        <div class="media-card-title">"Best decision of my life" - Aparna</div>
+                        <div class="media-card-duration">2:15</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-left">
+            <a href="#">Privacy & Policy</a>
+            
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+            <div class="footer-contact-icons">
+                <a href="#" class="contact-bubble bubble-chat" aria-label="Chat">
+                    <i class="fa-solid fa-comment-dots"></i>
+                </a>
+                <a href="#" class="contact-bubble bubble-wa" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-center">
+            <b>© 2026 Swapnagruha.com | All rights reserved | </b> 
+            <span class="powered-by-text">Powered By: <i class="fa-solid fa-shield-halved"></i> Tranquil</span>
+        </div>
+    </footer>
+</body>
+</html>
