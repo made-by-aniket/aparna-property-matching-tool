@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Property Matching Questionnaire - Swapna Gruha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -529,25 +530,11 @@
             transform: scale(1.1);
         }
 
-        .media-card-1 {
-            background: linear-gradient(135deg, #1a2a4e 0%, #2c3e5e 100%);
-        }
-
-        .media-card-2 {
-            background: linear-gradient(135deg, #ff3366 0%, #ff8844 100%);
-        }
-
-        .media-card-3 {
-            background: linear-gradient(135deg, #8b2e2e 0%, #a85555 100%);
-        }
-
-        .media-card-4 {
-            background: linear-gradient(135deg, #5a5a3a 0%, #8a8a6a 100%);
-        }
-
-        .media-card-5 {
-            background: linear-gradient(135deg, #1a5a3a 0%, #2a8a5a 100%);
-        }
+        .media-card-1 { background: linear-gradient(135deg, #1a2a4e 0%, #2c3e5e 100%); }
+        .media-card-2 { background: linear-gradient(135deg, #ff3366 0%, #ff8844 100%); }
+        .media-card-3 { background: linear-gradient(135deg, #8b2e2e 0%, #a85555 100%); }
+        .media-card-4 { background: linear-gradient(135deg, #5a5a3a 0%, #8a8a6a 100%); }
+        .media-card-5 { background: linear-gradient(135deg, #1a5a3a 0%, #2a8a5a 100%); }
 
         .media-card-title {
             position: absolute;
@@ -560,9 +547,123 @@
             z-index: 1;
         }
 
+        /* --- NEW FOOTER STYLES --- */
+        .site-footer {
+            background-color: #0a1930;
+            color: white;
+            padding: 0 40px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            font-size: 13px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            z-index: 10;
+        }
+
+        .footer-left > a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-social {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #ff8c00;
+        }
+
+        .footer-contact-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 10px;
+        }
+
+        .contact-bubble {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            border: 2px solid white;
+            position: relative;
+            top: -5px; /* Creates the pop-out effect from the image */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .contact-bubble:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .bubble-chat { background-color: #3b82f6; }
+        .bubble-wa { background-color: #22c55e; }
+
+        .footer-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        .footer-center b {
+            font-weight: normal;
+        }
+        
+        .powered-by-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         @media (max-width: 1200px) {
             .media-cards-grid {
                 grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                height: auto;
+                padding: 25px;
+                gap: 20px;
+            }
+            .footer-center {
+                position: static;
+                transform: none;
+                text-align: center;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .contact-bubble {
+                top: 0;
             }
         }
 
@@ -626,13 +727,12 @@
                     <div class="step-label">Price Range</div>
                 </li>
             </ul>
-            <div class="sidebar-footer">
+            <!-- <div class="sidebar-footer">
                 Secure local analytics. Your search preferences are stored exclusively on client state.
-            </div>
+            </div> -->
         </div>
 
         <div class="main-content">
-            <!-- Step 1 - Property Type -->
             <div class="questionnaire-step active" data-step="1">
                 <div class="step-indicator">STEP 01 / 04</div>
                 <h2 class="question-title">What type of property are you looking for?</h2>
@@ -649,12 +749,10 @@
                     </div>
                 </div>
                 <div class="button-group">
-                    <!-- <button class="btn btn-back" onclick="previousStep()">Previous</button> -->
                     <button class="btn btn-next" onclick="nextStep()">Next</button>
                 </div>
             </div>
 
-            <!-- Step 2 - Location -->
             <div class="questionnaire-step" data-step="2">
                 <div class="step-indicator">STEP 02 / 04</div>
                 <h2 class="question-title">Which location do you prefer?</h2>
@@ -679,7 +777,6 @@
                 </div>
             </div>
 
-            <!-- Step 3 - Configuration -->
             <div class="questionnaire-step" data-step="3">
                 <div class="step-indicator">STEP 03 / 04</div>
                 <h2 class="question-title">What configuration do you prefer?</h2>
@@ -704,7 +801,6 @@
                 </div>
             </div>
 
-            <!-- Step 4 - Price Range -->
             <div class="questionnaire-step" data-step="4">
                 <div class="step-indicator">STEP 04 / 04</div>
                 <h2 class="question-title">What is your budget range?</h2>
@@ -729,7 +825,6 @@
                 </div>
             </div>
 
-            <!-- Results -->
             <div class="results-section" id="resultsSection">
                 <h2 class="question-title">Your Calculated Fits</h2>
                 <p class="question-description" style="margin-bottom: 30px;">These are your personalized property recommendations based on your preferences</p>
@@ -938,5 +1033,31 @@
             </div>
         </div>
     </section>
+
+    <footer class="site-footer">
+        <div class="footer-left">
+            <a href="#">Privacy & Policy</a>
+            
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+            <div class="footer-contact-icons">
+                <a href="#" class="contact-bubble bubble-chat" aria-label="Chat">
+                    <i class="fa-solid fa-comment-dots"></i>
+                </a>
+                <a href="#" class="contact-bubble bubble-wa" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-center">
+            <b>© 2026 Swapnagruha.com | All rights reserved | </b> 
+            <span class="powered-by-text">Powered By: <i class="fa-solid fa-shield-halved"></i> Tranquil</span>
+        </div>
+    </footer>
 </body>
 </html>
