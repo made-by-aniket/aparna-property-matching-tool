@@ -299,6 +299,27 @@
             border-radius: 8px;
             padding: 25px;
             margin-bottom: 20px;
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        .result-card-image {
+            flex-shrink: 0;
+            width: 220px;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .result-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .result-card-content {
+            flex: 1;
         }
 
         .result-rank {
@@ -665,16 +686,16 @@
                 <p class="question-description">Select the number of bedrooms that suits your requirement.</p>
                 <div class="options-container">
                     <div class="option-card" onclick="selectOption(this, 3)">
-                        <div class="option-title">2 BHK</div>
+                        <div class="option-title">1 BHK</div>
                     </div>
                     <div class="option-card" onclick="selectOption(this, 3)">
-                        <div class="option-title">2.5 BHK</div>
+                        <div class="option-title">2 BHK</div>
                     </div>
                     <div class="option-card" onclick="selectOption(this, 3)">
                         <div class="option-title">3 BHK</div>
                     </div>
                     <div class="option-card" onclick="selectOption(this, 3)">
-                        <div class="option-title">4 BHK</div>
+                        <div class="option-title">4 BHK and Above</div>
                     </div>
                 </div>
                 <div class="button-group">
@@ -714,40 +735,49 @@
                 <p class="question-description" style="margin-bottom: 30px;">These are your personalized property recommendations based on your preferences</p>
                 
                 <div class="result-card">
-                    <div class="result-rank">Rank #1 Fit</div>
-                    <div class="result-title">Aparna Zenon</div>
-                    <div style="color: #999; margin-bottom: 15px;">Puppalaguda, near Nanakramguda</div>
-                    <div style="margin-bottom: 15px;">
-                        <span class="result-match">98%</span>
-                        <span class="match-label">MATCH RATE</span>
+                    <div class="result-card-image">
+                        <img src="./aparna-zenon-new.png" alt="Aparna Zenon">
                     </div>
-                    <div style="margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 15px;">
-                        <strong style="color: #ff8c00;">MATCHING PARAMETERS</strong>
-                        <div class="detail-item"><span class="tick">✓</span> Perfect representation of your selected elite mid-budget scale.</div>
-                        <div class="detail-item"><span class="tick">✓</span> Offers customized layout options for 3 BHK configurations directly.</div>
-                        <div class="detail-item"><span class="tick">✓</span> Engineered for quick accessibility to primary IT corridor centers.</div>
+                    <div class="result-card-content">
+                        <div class="result-rank">Rank #1 Fit</div>
+                        <div class="result-title">Aparna Zenon</div>
+                        <div style="color: #999; margin-bottom: 15px;">Puppalaguda, near Nanakramguda</div>
+                        <div style="margin-bottom: 15px;">
+                            <span class="result-match">98%</span>
+                            <span class="match-label">MATCH RATE</span>
+                        </div>
+                        <div style="margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 15px;">
+                            <strong style="color: #ff8c00;">MATCHING PARAMETERS</strong>
+                            <div class="detail-item"><span class="tick">✓</span> Perfect representation of your selected elite mid-budget scale.</div>
+                            <div class="detail-item"><span class="tick">✓</span> Offers customized layout options for 3 BHK configurations directly.</div>
+                            <div class="detail-item"><span class="tick">✓</span> Engineered for quick accessibility to primary IT corridor centers.</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="result-card">
-                    <div class="result-rank">Rank #2 Fit</div>
-                    <div class="result-title">Aparna Sarovar Zenith</div>
-                    <div style="color: #999; margin-bottom: 15px;">Nallagandla, near Gachibowli</div>
-                    <div style="margin-bottom: 15px;">
-                        <span class="result-match">96%</span>
-                        <span class="match-label">MATCH RATE</span>
+                    <div class="result-card-image">
+                        <img src="./aparna-sarovar-zenith.png" alt="Aparna Sarovar Zenith">
                     </div>
-                    <div style="margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 15px;">
-                        <strong style="color: #ff8c00;">MATCHING PARAMETERS</strong>
-                        <div class="detail-item"><span class="tick">✓</span> Premium smart living experience with integrated smart home features.</div>
-                        <div class="detail-item"><span class="tick">✓</span> Dedicated facilities for eco-conscious lifestyle priorities.</div>
-                        <div class="detail-item"><span class="tick">✓</span> High-connectivity access to multiple IT and corporate zones.</div>
+                    <div class="result-card-content">
+                        <div class="result-rank">Rank #2 Fit</div>
+                        <div class="result-title">Aparna Sarovar Zenith</div>
+                        <div style="color: #999; margin-bottom: 15px;">Nallagandla, near Gachibowli</div>
+                        <div style="margin-bottom: 15px;">
+                            <span class="result-match">96%</span>
+                            <span class="match-label">MATCH RATE</span>
+                        </div>
+                        <div style="margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 15px;">
+                            <strong style="color: #ff8c00;">MATCHING PARAMETERS</strong>
+                            <div class="detail-item"><span class="tick">✓</span> Premium smart living experience with integrated smart home features.</div>
+                            <div class="detail-item"><span class="tick">✓</span> Dedicated facilities for eco-conscious lifestyle priorities.</div>
+                            <div class="detail-item"><span class="tick">✓</span> High-connectivity access to multiple IT and corporate zones.</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="button-group" style="margin-top: 40px;">
                     <button class="btn btn-back" onclick="goBack()">Modify Preferences</button>
-                    <button class="btn btn-next" style="background-color: #ff8c00;" onclick="contactConsultant()">Schedule VIP Consultation</button>
                 </div>
             </div>
         </div>
@@ -766,6 +796,15 @@
 
         function nextStep() {
             if (currentStep < 4) {
+                // Check if an option is selected
+                const activeStep = document.querySelector(`[data-step="${currentStep}"]`);
+                const selectedOption = activeStep.querySelector('.option-card.selected');
+                
+                if (!selectedOption) {
+                    alert('Please select an option before proceeding.');
+                    return;
+                }
+                
                 document.querySelectorAll('.questionnaire-step').forEach(el => {
                     el.classList.remove('active');
                 });
@@ -798,6 +837,15 @@
         }
 
         function showResults() {
+            // Check if an option is selected on the last step
+            const lastStep = document.querySelector(`[data-step="4"]`);
+            const selectedOption = lastStep.querySelector('.option-card.selected');
+            
+            if (!selectedOption) {
+                alert('Please select an option before viewing results.');
+                return;
+            }
+            
             document.querySelectorAll('.questionnaire-step').forEach(el => {
                 el.classList.remove('active');
             });
